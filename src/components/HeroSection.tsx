@@ -38,11 +38,11 @@ const HeroSection = () => {
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
             <span className="block animate-[fadeIn_1s_ease-in-out_forwards,slideUp_1s_ease-out_forwards] opacity-0 translate-y-8">Smartere Skoler</span>
-            <span className="block mt-2 animate-[fadeIn_1s_ease-in-out_0.3s_forwards,slideUp_1s_ease-out_0.3s_forwards,pulse_2s_ease-in-out_1.3s] opacity-0 translate-y-8">Mennesker i centrum.</span>
+            <span className="block mt-2 animate-[fadeIn_1s_ease-in-out_0.3s_forwards,slideUp_1s_ease-out_0.3s_forwards,pulse_2s_ease-in-out_1.3s] opacity-0 translate-y-8">Mennesker i centrum</span>
           </h1>
           
           <p className="text-lg md:text-xl text-white/80 max-w-xl mx-auto mb-8 transition-all duration-1000 ease-out delay-600 translate-y-0 opacity-100" style={{ animationFillMode: 'forwards' }}>
-            Vi er et dansk AI-firma, der underviser og bygger løsninger til Efterskoler, Frie Fagskoler og Specialskoler.
+            Vi er et dansk AI-startup, der underviser og bygger løsninger til Efterskoler, Frie Fagskoler og Specialskoler.
           </p>
           
           <a 
