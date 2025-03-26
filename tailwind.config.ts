@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -90,6 +89,31 @@ export default {
 					},
 					to: {
 						height: '0'
+					}
+				},
+				'fadeIn': {
+					'0%': {
+						opacity: '0'
+					},
+					'100%': {
+						opacity: '1'
+					}
+				},
+				'slideUp': {
+					'0%': {
+						transform: 'translateY(30px)'
+					},
+					'100%': {
+						transform: 'translateY(0)'
+					}
+				},
+				'pulse': {
+					'0%, 100%': { 
+						transform: 'scale(1)'
+					},
+					'50%': { 
+						transform: 'scale(1.05)',
+						textShadow: '0 0 15px rgba(119, 242, 161, 0.7)'
 					}
 				},
 				'fade-in': {

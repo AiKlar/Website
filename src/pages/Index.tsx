@@ -2,6 +2,7 @@
 import { useEffect } from "react";
 import Header from "@/components/Header";
 import HeroSection from "@/components/HeroSection";
+import AboutSection from "@/components/AboutSection";
 import FoundersSection from "@/components/FoundersSection";
 import OfferingsSection from "@/components/OfferingsSection";
 import ProductSection from "@/components/ProductSection";
@@ -38,6 +39,7 @@ const Index = () => {
     <div className="min-h-screen bg-aiklar-light">
       <Header />
       <HeroSection />
+      <AboutSection />
       <FoundersSection />
       <OfferingsSection />
       <ProductSection />
