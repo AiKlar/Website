@@ -1,7 +1,7 @@
-
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-const Header = () => {
+const SkoleM8Header = () => {
   const [scrolled, setScrolled] = useState(false);
   
   useEffect(() => {
@@ -23,18 +23,18 @@ const Header = () => {
       scrolled ? 'bg-aiklar-dark/90 backdrop-blur-md py-3' : 'bg-transparent py-5'
     }`}>
       <div className="container mx-auto px-6 flex justify-between items-center">
-        <a 
-          href="/"
+        <Link 
+          to="/"
           className="text-2xl font-bold text-white tracking-tight cursor-pointer"
         >
           <span className="text-aiklar-green">Ai</span>Klar
-        </a>
+        </Link>
         <nav className="hidden md:block">
           <ul className="flex space-x-8">
             {['Om os', 'Det vi gør', 'SkoleM8', 'Kontakt'].map((item) => (
               <li key={item}>
                 <a 
-                  href={`#${item === 'Om os' ? 'about' : item === 'Det vi gør' ? 'ydelser' : item.toLowerCase()}`} 
+                  href={`/?section=${item === 'Om os' ? 'about' : item === 'Det vi gør' ? 'ydelser' : item.toLowerCase()}`} 
                   className="text-white/80 hover:text-white transition-colors duration-300 text-sm tracking-wide"
                 >
                   {item}
@@ -48,4 +48,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default SkoleM8Header;

@@ -28,6 +28,18 @@ const Index = () => {
       observer.observe(el);
     });
 
+    // Handle section scrolling from URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const section = urlParams.get('section');
+    if (section) {
+      const element = document.getElementById(section);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    }
+
     return () => {
       document.querySelectorAll('.fadeInElement').forEach(el => {
         observer.unobserve(el);

@@ -65,6 +65,7 @@ export default {
 				aiklar: {
 					dark: '#1F2B37',
 					blue: '#4F76F6',
+					'blue-dark': '#3A5FD9',
 					light: '#F9F9F9',
 					green: '#77F2A1'
 				}

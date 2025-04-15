@@ -33,16 +33,16 @@ const AboutSection = () => {
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-aiklar-dark mb-8 text-center animate-fade-in">
-            Hvad vi <span className="text-aiklar-blue">gør</span>
+            Om <span className="text-aiklar-blue">os</span>
           </h2>
           
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-slide-in">
               <p className="text-lg text-aiklar-dark/80 leading-relaxed">
-                Hos AiKlar har vi en dyb forståelse for, at kunstig intelligens kun har værdi, når den sætter mennesker i stand til at opnå mere. Vi bygger AI-systemer, der forstærker menneskelige evner i stedet for at erstatte dem.
+              AiKlar er et dansk AI-firma med rødder i uddannelsessektoren og et klart mål: at bringe kunstig intelligens i øjenhøjde med mennesker. Vi udvikler løsninger, der er til at forstå, til at stole på – og til at bruge i praksis.
               </p>
               <p className="text-lg text-aiklar-dark/80 leading-relaxed">
-                Vi fokuserer på at udvikle løsninger, der er transparente, forklarlige og etisk forsvarlige. Vores team kombinerer ekspertise inden for maskinlæring, software udvikling og domænespecifik viden for at skabe teknologier, der fungerer i den virkelige verden.
+              Vi er et lille, dedikeret team med stærke kompetencer inden for maskinlæring, softwareudvikling og pædagogik. Vores arbejde bygger på troen på, at AI skal understøtte – ikke overtage – menneskelige beslutninger og relationer. Med SkoleM8, onlinekurser og målrettet rådgivning hjælper vi skoler med at navigere sikkert og meningsfuldt i en teknologisk virkelighed i hastig udvikling.
               </p>
             </div>
             
@@ -56,7 +56,7 @@ const AboutSection = () => {
                     </svg>
                   </div>
                   <span className="text-aiklar-dark/80">
-                    <strong className="text-aiklar-dark">Menneskecentreret design</strong> - Vi lytter til brugerne og designer løsninger, der naturligt passer ind i deres arbejdsgang.
+                    <strong className="text-aiklar-dark">AI med mening</strong> - Vores løsninger skaber reel værdi i skolehverdagen – for både lærere, elever og ledere.
                   </span>
                 </li>
                 <li className="flex items-start">
@@ -66,7 +66,7 @@ const AboutSection = () => {
                     </svg>
                   </div>
                   <span className="text-aiklar-dark/80">
-                    <strong className="text-aiklar-dark">Transparens</strong> - Vi bygger systemer, hvor beslutningsprocesser er gennemskuelige og forståelige.
+                    <strong className="text-aiklar-dark">Sikkerhed som standard</strong> - Vi prioriterer datasikkerhed og overholder alle gældende regler, herunder GDPR og EU's AI-forordning.
                   </span>
                 </li>
                 <li className="flex items-start">
@@ -76,7 +76,7 @@ const AboutSection = () => {
                     </svg>
                   </div>
                   <span className="text-aiklar-dark/80">
-                    <strong className="text-aiklar-dark">Etisk ansvarlighed</strong> - Vi integrerer etiske overvejelser i alle aspekter af vores udviklingsproces.
+                    <strong className="text-aiklar-dark">Skabt til skoler</strong> - Teknologien er udviklet af folk med rødder i skoleverdenen – den passer til jeres praksis, ikke omvendt.
                   </span>
                 </li>
                 <li className="flex items-start">
@@ -86,7 +86,7 @@ const AboutSection = () => {
                     </svg>
                   </div>
                   <span className="text-aiklar-dark/80">
-                    <strong className="text-aiklar-dark">Praktisk innovation</strong> - Vi skaber løsninger, der løser reelle problemer og skaber målbar værdi.
+                    <strong className="text-aiklar-dark">Vi bygger viden</strong> - AiKlar er mere end produkter – vi uddanner, inspirerer og hjælper skoler med at blive klar til fremtiden med AI.
                   </span>
                 </li>
               </ul>

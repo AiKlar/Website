@@ -68,7 +68,7 @@ const OfferingsSection = () => {
     <section id="ydelser" ref={sectionRef} className="py-24 px-6 bg-aiklar-light">
       <div className="container mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 section-heading">
-          Hvad vi tilbyder
+          Det vi gør
         </h2>
         
         <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">

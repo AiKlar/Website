@@ -42,7 +42,7 @@ const HeroSection = () => {
           </h1>
           
           <p className="text-lg md:text-xl text-white/80 max-w-xl mx-auto mb-8 transition-all duration-1000 ease-out delay-600 translate-y-0 opacity-100" style={{ animationFillMode: 'forwards' }}>
-            Vi er et dansk AI-startup, der underviser og bygger løsninger til Efterskoler, Frie Fagskoler og Specialskoler.
+          Vi er en dansk EdTech (Educational Technology) virksomhed der underviser og bygger AI løsninger til Efterskoler, Frie Fagskoler og Specialskoler i hele Danmark.
           </p>
           
           <a 

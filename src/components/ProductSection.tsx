@@ -41,7 +41,7 @@ const ProductSection = () => {
         
         <div className="max-w-2xl mx-auto mb-12 bg-aiklar-blue/10 p-4 rounded-lg border border-aiklar-blue/20 text-center">
           <p className="text-aiklar-dark font-medium mb-2">Under Udvikling</p>
-          <p className="text-aiklar-dark/80 text-sm">
+          <p className="text-aiklar-dark/80 text-sm mb-4">
             SkoleM8 er i øjeblikket under udvikling. Vi søger skoler, der vil være med til at udvikle SkoleM8 sammen med os, så den kan blive den bedste tæt integrerede digitale kontaktlærer, elev og undervisningsassistent. 
             <a href="#kontakt" className="text-aiklar-blue hover:underline ml-1">
               Kontakt os for at høre mere.
@@ -93,6 +93,15 @@ const ProductSection = () => {
               <p className="text-aiklar-dark/70">Kommunikerer i et sprog og tonefald, der matcher efterskoleelevernes hverdag.</p>
             </div>
           </div>
+        </div>
+        
+        <div className="mt-12 text-center">
+          <a 
+            href="/skolem8" 
+            className="inline-block px-6 py-3 bg-aiklar-blue text-white font-medium rounded-lg hover:bg-aiklar-blue-dark transition-colors duration-300"
+          >
+            Læs mere om SkoleM8
+          </a>
         </div>
       </div>
     </section>
