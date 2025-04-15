@@ -37,7 +37,7 @@ const SkoleM8 = () => {
       <SkoleM8Header />
       
       {/* Hero Section */}
-      <section className="relative min-h-[50vh] flex items-center bg-aiklar-dark py-24 mt-0">
+      <section className="relative min-h-[20vh] flex items-center bg-aiklar-dark py-24 mt-0">
         <div className="absolute inset-0 bg-gradient-to-b from-aiklar-dark/30 to-aiklar-dark" />
         
         {/* Decorative elements */}
@@ -47,7 +47,7 @@ const SkoleM8 = () => {
         <div className="container mx-auto px-6 relative z-10">
           <div className="max-w-4xl mx-auto">
             <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">SkoleM8</h1>
-            <p className="text-xl md:text-2xl text-white/80 mb-8">
+            <p className="text-xl md:text-2xl text-white/80">
               Den digitale assistent der taler skolens sprog og understøtter elever, lærere og ledelse.
             </p>
           </div>
