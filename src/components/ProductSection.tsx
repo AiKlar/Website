@@ -35,11 +35,11 @@ const ProductSection = () => {
   return (
     <section id="skolem8" ref={sectionRef} className="py-24 px-6 bg-white">
       <div className="container mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 section-heading">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 section-heading">
           SkoleM8
         </h2>
         
-        <div className="flex flex-col md:flex-row max-w-6xl mx-auto items-start gap-8 mt-2">
+        <div className="flex flex-col md:flex-row max-w-6xl mx-auto items-start gap-8 mt-4">
           <div className="flex justify-center fadeInElement w-full md:w-1/2">
             <div className="relative w-full max-w-lg h-auto">
               <img 
@@ -76,15 +76,6 @@ const ProductSection = () => {
               </div>
             </div>
             
-            <div className="mb-6 bg-aiklar-blue/10 p-4 rounded-lg border border-aiklar-blue/20">
-              <p className="text-aiklar-dark font-medium mb-2">Under Udvikling</p>
-              <p className="text-aiklar-dark/80 text-sm">
-                SkoleM8 er i øjeblikket under udvikling. Vi søger skoler, der vil være med til at udvikle SkoleM8 sammen med os, så den kan blive den bedste tæt integrerede digitale kontaktlærer, elev og undervisningsassistent. 
-                <a href="#kontakt" className="text-aiklar-blue hover:underline ml-1">
-                  Kontakt os for at høre mere.
-                </a>
-              </p>
-            </div>
             
             <div>
               <a 

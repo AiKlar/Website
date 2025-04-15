@@ -45,11 +45,24 @@ const SkoleM8 = () => {
         <div className="absolute bottom-1/3 right-1/4 w-72 h-72 bg-aiklar-green/10 rounded-full blur-3xl" />
         
         <div className="container mx-auto px-6 relative z-10">
-          <div className="max-w-4xl mx-auto">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">SkoleM8</h1>
-            <p className="text-xl md:text-2xl text-white/80">
-              Den digitale assistent der taler skolens sprog og understøtter elever, lærere og ledelse.
-            </p>
+          <div className="max-w-5xl mx-auto">
+            <div className="flex flex-col md:flex-row items-center gap-8">
+              <div className="md:w-1/2">
+                <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">SkoleM8</h1>
+                <p className="text-xl md:text-2xl text-white/80">
+                  Den digitale assistent der taler skolens sprog og understøtter elever, lærere og ledelse.
+                </p>
+              </div>
+              <div className="md:w-1/2 mt-8 md:mt-0">
+                <div className="relative w-full max-w-lg mx-auto">
+                  <img 
+                    src="/skolem8_dialog1.png" 
+                    alt="SkoleM8 Dialog Interface" 
+                    className="rounded-lg shadow-xl w-full"
+                  />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
@@ -84,7 +97,7 @@ const SkoleM8 = () => {
                 <p className="text-center font-medium mb-4">SkoleM8 er i øjeblikket under udvikling</p>
                 <p className="text-center">
                   Vi søger skoler, der vil være med til at udvikle SkoleM8 sammen med os. 
-                  <a href="/#kontakt" className="text-aiklar-blue hover:underline ml-1">
+                  <a href="/?section=kontakt" className="text-aiklar-blue hover:underline ml-1">
                     Kontakt os for at høre mere.
                   </a>
                 </p>
@@ -95,15 +108,38 @@ const SkoleM8 = () => {
                 SkoleM8 er ikke en generisk chatbot. Den er skræddersyet til netop jeres skole og kan svare på spørgsmål om skemaer, regler, arrangementer, kostpolitik, retningslinjer, lærernes roller og meget mere. Den forstår skolens kultur og kontekst og kan derfor give relevante, præcise og værdifulde svar til både elever og lærere.
               </p>
               
+              <div className="my-8 flex flex-col md:flex-row gap-6 items-center md:items-start">
+                <div className="md:w-1/2">
+                  <img 
+                    src="/integreretillustration.png" 
+                    alt="SkoleM8 integration illustration" 
+                    className="rounded-lg shadow-md max-w-full w-auto h-auto"
+                  />
+                </div>
+                <div className="md:w-1/2">
+                  <div className="space-y-4">
+                    <div className="p-3 bg-aiklar-blue/5 rounded-lg border border-aiklar-blue/10">
+                      <h4 className="font-semibold text-aiklar-dark">Skemaoplysninger</h4>
+                      <p className="text-sm text-aiklar-dark/80">Integreret med skolens skema og kalender i øvrigt, så den ved hvornår der er undervisning, møder og arrangementer</p>
+                    </div>
+                    <div className="p-3 bg-aiklar-blue/5 rounded-lg border border-aiklar-blue/10">
+                      <h4 className="font-semibold text-aiklar-dark">Kender jeres skole</h4>
+                      <p className="text-sm text-aiklar-dark/80">SkoleM8 kender jeres regler, kultur, traditioner og værdier ved at integrere med jeres dokumenter m.v.</p>
+                    </div>
+                    <div className="p-3 bg-aiklar-blue/5 rounded-lg border border-aiklar-blue/10">
+                      <h4 className="font-semibold text-aiklar-dark">Personligt tilpasset</h4>
+                      <p className="text-sm text-aiklar-dark/80">Tilpasset brugeren, ved hvad der er relevant information og kontekst</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
               <h3 className="text-2xl font-bold mt-8">Understøtter eleverne i centrale skolefag</h3>
               <p>
                 SkoleM8 er trænet til at støtte op om undervisningen matematik, dansk, samfundsfag m.fl. Den kan stille opklarende spørgsmål, forklare begreber, foreslå løsningsmetoder og inspirere – uden at levere færdige svar. På den måde fremmer- og understøtter den læring frem for at erstatte den.
               </p>
               
-              <h3 className="text-2xl font-bold mt-8">Din faglige sparringspartner</h3>
-              <p>
-                SkoleM8 assisterer lærere og undervisere med effektivt at skabe lektionsplaner, opgaver og differentierede undervisningsforløb. Den sparrer på idéer, formulerer skriftligt materiale og giver inspiration til nye vinkler på undervisningen. Det frigør tid og styrker kvaliteten, så læreren kan fokusere på relationer og nærvær i klassen.
-              </p>
+             
               
               <h3 className="text-2xl font-bold mt-8">Afspejler dansk skolekultur i sprog og udtryk</h3>
               <p>
@@ -118,6 +154,38 @@ const SkoleM8 = () => {
               <p>
                 Når nye elever starter, er SkoleM8 klar som en digital introduktion til hverdagen. Den kan svare på alt fra praktiske spørgsmål til sociale spilleregler, og giver tryghed i overgangsperioden.
               </p>
+
+              <h3 className="text-2xl font-bold mt-8">Din faglige sparringspartner</h3>
+              <p>
+                SkoleM8 assisterer lærere og undervisere med effektivt at skabe lektionsplaner, opgaver og differentierede undervisningsforløb. Den sparrer på idéer, formulerer skriftligt materiale og giver inspiration til nye vinkler på undervisningen. Det frigør tid og styrker kvaliteten, så læreren kan fokusere på relationer og nærvær i klassen.
+              </p>
+              
+              <div className="my-8 flex flex-col md:flex-row gap-6 items-center md:items-start">
+                <div className="md:w-1/2">
+                  <img 
+                    src="/fagligillustration.png" 
+                    alt="SkoleM8 som faglig sparringspartner" 
+                    className="rounded-lg shadow-md max-w-full w-auto h-auto"
+                  />
+                </div>
+                <div className="md:w-1/2">
+                  <div className="space-y-4">
+                    <div className="p-3 bg-aiklar-blue/5 rounded-lg border border-aiklar-blue/10">
+                      <h4 className="font-semibold text-aiklar-dark">Effektiv planlægning</h4>
+                      <p className="text-sm text-aiklar-dark/80">Hjælper med at skabe undervisningsplaner, materialer og opgaver tilpasset forskellige niveauer</p>
+                    </div>
+                    <div className="p-3 bg-aiklar-blue/5 rounded-lg border border-aiklar-blue/10">
+                      <h4 className="font-semibold text-aiklar-dark">Kreativ inspiration</h4>
+                      <p className="text-sm text-aiklar-dark/80">Giver idéer til nye vinkler på undervisningen og forslag til engagerende aktiviteter</p>
+                    </div>
+                    <div className="p-3 bg-aiklar-blue/5 rounded-lg border border-aiklar-blue/10">
+                      <h4 className="font-semibold text-aiklar-dark">Tidsbesparende</h4>
+                      <p className="text-sm text-aiklar-dark/80">Frigør tid til relationsarbejde ved at håndtere rutineopgaver og administrative spørgsmål</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
               
               <h3 className="text-2xl font-bold mt-8">Datadrevet indsigt til fremtidens skole</h3>
               <p>

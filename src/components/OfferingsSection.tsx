@@ -106,7 +106,7 @@ const OfferingsSection = () => {
           
           <Offering 
             title="AI Løsninger" 
-            description="Målrettede AI løsninger til Efterskolerne, Frie Fagskoler og Specialskoler. Herunder vores SkoleM8 (SkoleMate), som er en chatbot der kan hjælpe eleverne i og udenfor undervisningen. En slags digital kontaktlære, dansklære, matematiklære og meget mere."
+            description="Vi udvikler skræddersyede AI-løsninger til Efterskoler, Frie Fagskoler og Specialskoler – løsninger, der gør en konkret forskel i den daglige skolegang for lærere, elever og ledelse."
             bulletPoints={[
               "SkoleM8 - Digital kontaktlærer og assistent",
               "Værktøjer til effektivisering af administration",
