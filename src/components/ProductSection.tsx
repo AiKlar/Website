@@ -35,73 +35,66 @@ const ProductSection = () => {
   return (
     <section id="skolem8" ref={sectionRef} className="py-24 px-6 bg-white">
       <div className="container mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 section-heading">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-4 section-heading">
           SkoleM8
         </h2>
         
-        <div className="max-w-2xl mx-auto mb-12 bg-aiklar-blue/10 p-4 rounded-lg border border-aiklar-blue/20 text-center">
-          <p className="text-aiklar-dark font-medium mb-2">Under Udvikling</p>
-          <p className="text-aiklar-dark/80 text-sm mb-4">
-            SkoleM8 er i øjeblikket under udvikling. Vi søger skoler, der vil være med til at udvikle SkoleM8 sammen med os, så den kan blive den bedste tæt integrerede digitale kontaktlærer, elev og undervisningsassistent. 
-            <a href="#kontakt" className="text-aiklar-blue hover:underline ml-1">
-              Kontakt os for at høre mere.
-            </a>
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto items-center">
-          <div className="space-y-8 md:pr-6">
-            <div className="feature-item fadeInElement">
-              <h3 className="font-semibold mb-2">Tæt integreret med din skole</h3>
-              <p className="text-aiklar-dark/70">SkoleM8 kan give info om skemaer, regler på skolen, kultur og meget mere, da den er tæt integreret med netop jeres skole.</p>
-            </div>
-            <div className="feature-item fadeInElement">
-              <h3 className="font-semibold mb-2">Opdager tegn på mistrivsel og reagerer</h3>
-              <p className="text-aiklar-dark/70">SkoleM8 leder hele tiden efter spor på mistrivsel, med AI modeller specielt trænet til dette. Herefter guider den unge i retning mod kvalificeret hjælp.</p>
+        <div className="flex flex-col md:flex-row max-w-6xl mx-auto items-start gap-8 mt-2">
+          <div className="flex justify-center fadeInElement w-full md:w-1/2">
+            <div className="relative w-full max-w-lg h-auto">
+              <img 
+                src="/skolem8_dialog1.png" 
+                alt="SkoleM8 Dialog Interface" 
+                className="mx-auto rounded-lg shadow-lg w-full"
+              />
             </div>
           </div>
           
-          <div className="flex justify-center fadeInElement">
-            <div className="relative w-64 h-auto">
-              <div className="absolute inset-0 bg-gradient-to-b from-aiklar-blue/20 to-aiklar-green/20 rounded-3xl blur-xl -z-10"></div>
-              <div className="bg-aiklar-dark rounded-3xl overflow-hidden border-8 border-aiklar-dark shadow-2xl">
-                <div className="w-full h-12 bg-aiklar-dark flex items-center justify-center">
-                  <div className="w-24 h-4 rounded-full bg-aiklar-dark-800"></div>
-                </div>
-                <div className="bg-aiklar-light p-4 space-y-3 h-96">
-                  <div className="bg-white rounded-lg p-3 shadow-sm max-w-[80%]">
-                    <p className="text-sm">Hej! Jeg er SkoleM8. Hvordan kan jeg hjælpe dig i dag?</p>
-                  </div>
-                  <div className="bg-aiklar-blue/10 rounded-lg p-3 shadow-sm max-w-[80%] ml-auto">
-                    <p className="text-sm">Hvodan får man egentlig lettest nye venner på skolen her?</p>
-                  </div>
-                  <div className="bg-white rounded-lg p-3 shadow-sm max-w-[80%]">
-                    <p className="text-sm">Vi hører ofte fra tidligere elever at de mødte hinanden til fritidsarrangementerne om aftenen.</p>
-                  </div>
-                </div>
+          <div className="w-full md:w-1/2">
+            <p className="mb-6 text-aiklar-dark">
+              SkoleM8 er en digital assistent, der taler skolens sprog og er tæt integreret med jeres systemer. Den støtter eleverne i fagene, hjælper med struktur i hverdagen, reagerer på mistrivsel og fungerer som en virtuel kontaktlærer.
+            </p>
+            
+            <div className="grid grid-cols-1 gap-4 mb-6">
+              <div className="feature-item fadeInElement">
+                <h3 className="font-semibold">Tæt integreret med jeres skole i viden, sprog og udtryk</h3>
+              </div>
+              <div className="feature-item fadeInElement">
+                <h3 className="font-semibold">Hjælper i specifikke fag som matematik, dansk, fysik m.fl.</h3>
+              </div>
+              <div className="feature-item fadeInElement">
+                <h3 className="font-semibold">Afspejler dansk efterskolekultur i sprog og vejledning</h3>
+              </div>
+              <div className="feature-item fadeInElement">
+                <h3 className="font-semibold">Den digitale kontaktlærer</h3>
+              </div>
+              <div className="feature-item fadeInElement">
+                <h3 className="font-semibold">Datadrevet indsigt til fremtidens skole</h3>
+              </div>
+              <div className="feature-item fadeInElement">
+                <h3 className="font-semibold">Overholder datasikkerhed og lovgivning</h3>
               </div>
             </div>
-          </div>
-          
-          <div className="space-y-8 md:pl-6">
-            <div className="feature-item fadeInElement">
-              <h3 className="font-semibold mb-2">Hjælper i specifikke fag som matematik, dansk, fysik m.fl.</h3>
-              <p className="text-aiklar-dark/70">Giver faglig støtte og svar inden for pensum. SkoleM8 løser aldrig opgaven, men kan hjælpe eleven videre og inspirere til løsninger.</p>
+            
+            <div className="mb-6 bg-aiklar-blue/10 p-4 rounded-lg border border-aiklar-blue/20">
+              <p className="text-aiklar-dark font-medium mb-2">Under Udvikling</p>
+              <p className="text-aiklar-dark/80 text-sm">
+                SkoleM8 er i øjeblikket under udvikling. Vi søger skoler, der vil være med til at udvikle SkoleM8 sammen med os, så den kan blive den bedste tæt integrerede digitale kontaktlærer, elev og undervisningsassistent. 
+                <a href="#kontakt" className="text-aiklar-blue hover:underline ml-1">
+                  Kontakt os for at høre mere.
+                </a>
+              </p>
             </div>
-            <div className="feature-item fadeInElement">
-              <h3 className="font-semibold mb-2">Afspejler dansk efterskolekultur i sprog og vejledning</h3>
-              <p className="text-aiklar-dark/70">Kommunikerer i et sprog og tonefald, der matcher efterskoleelevernes hverdag.</p>
+            
+            <div>
+              <a 
+                href="/skolem8" 
+                className="inline-block px-6 py-3 bg-aiklar-blue text-white font-medium rounded-lg hover:bg-aiklar-blue-dark transition-colors duration-300"
+              >
+                Læs mere om SkoleM8
+              </a>
             </div>
           </div>
-        </div>
-        
-        <div className="mt-12 text-center">
-          <a 
-            href="/skolem8" 
-            className="inline-block px-6 py-3 bg-aiklar-blue text-white font-medium rounded-lg hover:bg-aiklar-blue-dark transition-colors duration-300"
-          >
-            Læs mere om SkoleM8
-          </a>
         </div>
       </div>
     </section>

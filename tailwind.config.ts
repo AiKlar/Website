@@ -157,5 +157,10 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	// Using CommonJS import style with proper TypeScript handling
+plugins: [
+  // @ts-expect-error - Suppressing error for CommonJS import in ESM context
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  require("tailwindcss-animate")
+],
 } satisfies Config;
