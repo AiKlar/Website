@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { Menu } from "lucide-react";
+import { useIsMobile } from "@/hooks/use-mobile";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
 
 const SkoleM8Header = () => {
   const [scrolled, setScrolled] = useState(false);
+  const isMobile = useIsMobile();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -18,6 +23,24 @@ const SkoleM8Header = () => {
     };
   }, [scrolled]);
 
+  const navItems = ['Om os', 'Det vi gør', 'SkoleM8', 'Kontakt'];
+
+  const NavLinks = ({ className = "", onClick = () => {} }) => (
+    <ul className={`space-y-4 md:space-y-0 md:flex md:space-x-8 ${className}`}>
+      {navItems.map((item) => (
+        <li key={item}>
+          <a 
+            href={`/?section=${item === 'Om os' ? 'about' : item === 'Det vi gør' ? 'ydelser' : item.toLowerCase()}`} 
+            className="text-white/80 hover:text-white transition-colors duration-300 text-sm tracking-wide"
+            onClick={onClick}
+          >
+            {item}
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
       scrolled ? 'bg-aiklar-dark/90 backdrop-blur-md py-3' : 'bg-transparent py-5'
@@ -29,20 +52,26 @@ const SkoleM8Header = () => {
         >
           <span className="text-aiklar-green">Ai</span>Klar
         </Link>
+        
         <nav className="hidden md:block">
-          <ul className="flex space-x-8">
-            {['Om os', 'Det vi gør', 'SkoleM8', 'Kontakt'].map((item) => (
-              <li key={item}>
-                <a 
-                  href={`/?section=${item === 'Om os' ? 'about' : item === 'Det vi gør' ? 'ydelser' : item.toLowerCase()}`} 
-                  className="text-white/80 hover:text-white transition-colors duration-300 text-sm tracking-wide"
-                >
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
+          <NavLinks />
         </nav>
+        
+        {isMobile && (
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon" className="text-white">
+                <Menu />
+                <span className="sr-only">Menu</span>
+              </Button>
+            </SheetTrigger>
+            <SheetContent className="bg-aiklar-dark/95 backdrop-blur-md text-white border-aiklar-dark">
+              <div className="flex flex-col h-full pt-10">
+                <NavLinks onClick={() => document.querySelector('[data-radix-dialog-close]')?.click()} />
+              </div>
+            </SheetContent>
+          </Sheet>
+        )}
       </div>
     </header>
   );
