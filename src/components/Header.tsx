@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const isMobile = useIsMobile();
+  const [open, setOpen] = useState(false);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -58,7 +59,7 @@ const Header = () => {
         </nav>
         
         {isMobile && (
-          <Sheet>
+          <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon" className="text-white">
                 <Menu />
@@ -67,7 +68,7 @@ const Header = () => {
             </SheetTrigger>
             <SheetContent className="bg-aiklar-dark/95 backdrop-blur-md text-white border-aiklar-dark">
               <div className="flex flex-col h-full pt-10">
-                <NavLinks onClick={() => document.querySelector('[data-radix-dialog-close]')?.click()} />
+                <NavLinks onClick={() => setOpen(false)} />
               </div>
             </SheetContent>
           </Sheet>
