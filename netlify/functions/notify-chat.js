@@ -1,9 +1,8 @@
-// Ingen ekstern fetch- eller abort-controller-pakke – brug Node.js 18+ global fetch og AbortController
+// Brug Node.js global fetch/AbortController (Node 18+)
 
 const CHAT_WEBHOOK_URL = process.env.GOOGLE_CHAT_WEBHOOK_URL;
 
 exports.handler = async function(event) {
-  // Sørg for at webhook URL er sat
   if (!CHAT_WEBHOOK_URL) {
     console.error("🚨 Mangler miljøvariablen GOOGLE_CHAT_WEBHOOK_URL");
     return { statusCode: 500, body: "Server konfigurationsfejl" };
@@ -11,6 +10,7 @@ exports.handler = async function(event) {
 
   console.log("🔍 Incoming raw event:", JSON.stringify(event, null, 2));
 
+  // Parse body
   let body;
   try {
     if (!event.body) throw new Error("Manglende request body");
@@ -18,22 +18,28 @@ exports.handler = async function(event) {
     console.log("🔍 Parsed body:", JSON.stringify(body, null, 2));
   } catch (err) {
     console.error("💥 Kunne ikke parse body som JSON:", err);
-    try {
-      await sendToChat(`❗️ Fejl ved parsing af body:\n\`\`\`${err.message}\`\`\`\nOriginal payload:\n\`\`\`${event.body}\`\`\``);
-    } catch {}
+    try { await sendToChat(`❗️ Fejl ved parsing af body:\n\`\`\`${err.message}\`\`\`\nOriginal payload:\n\`\`\`${event.body}\`\`\``); } catch {}
     return { statusCode: 400, body: `Invalid JSON: ${err.message}` };
   }
 
-  const payload = body.payload || {};
+  // Netlify event header
+  const netlifyEvent = event.headers['x-netlify-event'] || event.headers['X-Netlify-Event'] || '';
+
+  // Bestem payload-container: body.payload for deploy, body for form
+  const payload = body.payload || (netlifyEvent === 'submission_created' ? body : {});
   let message = "🤖 Ukendt besked fra webhook.";
 
   try {
-    if (payload.data) {
+    // Formular-indsendelse (Netlify form submission)
+    if (payload.data && (netlifyEvent === 'submission_created' || payload.form_name || payload.form_id)) {
+      const formName = payload.form_name || payload.form_id || 'ukendt';
       const lines = Object.entries(payload.data)
         .map(([key, val]) => `- *${key}:* ${val}`)
         .join("\n");
-      message = `📬 **Ny formular‑indsendelse (${payload.form_name || payload.form_id || 'ukendt'})**\n\n${lines}`;
-    } else if (payload.state) {
+      message = `📬 **Ny formular‑indsendelse (${formName})**\n\n${lines}`;
+    }
+    // Deploy-hændelse (Netlify deploy hook)
+    else if (payload.state) {
       const { state, branch, commit_ref, deploy_url, error_message } = payload;
       if (state === "ready") {
         message = `✅ **Deploy fuldført** på *${branch}*\n🔗 ${deploy_url}\n🔀 Commit: ${commit_ref}`;
@@ -42,7 +48,9 @@ exports.handler = async function(event) {
       } else {
         message = `ℹ️ **Deploy‑status:** ${state} på *${branch}*`;
       }
-    } else {
+    }
+    // Fallback
+    else {
       message = `ℹ️ Ukendt hændelse:\n\`\`\`json
 ${JSON.stringify(payload, null, 2)}\n\`\`\``;
     }
@@ -51,6 +59,7 @@ ${JSON.stringify(payload, null, 2)}\n\`\`\``;
     message = `❗️ Fejl ved behandling af payload:\n\`\`\`${err.message}\`\`\``;
   }
 
+  // Send til Google Chat
   try {
     await sendToChat(message);
     return { statusCode: 200, body: "Besked sendt til Google Chat" };
