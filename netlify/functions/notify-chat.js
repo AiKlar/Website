@@ -1,10 +1,9 @@
-// Ingen ekstern fetch-pakke - brug Netlify/Node 18 global fetch og AbortController
+// Ingen ekstern fetch- eller abort-controller-pakke – brug Node.js 18+ global fetch og AbortController
 
-// Webhook-URL gemt som miljøvariabel i Netlify
 const CHAT_WEBHOOK_URL = process.env.GOOGLE_CHAT_WEBHOOK_URL;
 
-exports.handler = async (event) => {
-  // Tjek at webhook-URL er sat
+exports.handler = async function(event) {
+  // Sørg for at webhook URL er sat
   if (!CHAT_WEBHOOK_URL) {
     console.error("🚨 Mangler miljøvariablen GOOGLE_CHAT_WEBHOOK_URL");
     return { statusCode: 500, body: "Server konfigurationsfejl" };
@@ -29,15 +28,12 @@ exports.handler = async (event) => {
   let message = "🤖 Ukendt besked fra webhook.";
 
   try {
-    // --- Formular‑indsendelse ---
     if (payload.data) {
       const lines = Object.entries(payload.data)
         .map(([key, val]) => `- *${key}:* ${val}`)
         .join("\n");
       message = `📬 **Ny formular‑indsendelse (${payload.form_name || payload.form_id || 'ukendt'})**\n\n${lines}`;
-    }
-    // --- Deploy‑hændelse ---
-    else if (payload.state) {
+    } else if (payload.state) {
       const { state, branch, commit_ref, deploy_url, error_message } = payload;
       if (state === "ready") {
         message = `✅ **Deploy fuldført** på *${branch}*\n🔗 ${deploy_url}\n🔀 Commit: ${commit_ref}`;
@@ -46,17 +42,15 @@ exports.handler = async (event) => {
       } else {
         message = `ℹ️ **Deploy‑status:** ${state} på *${branch}*`;
       }
-    }
-    // --- Fallback: dump payload ---
-    else {
-      message = `ℹ️ Ukendt hændelse:\n\`\`\`json\n${JSON.stringify(payload, null, 2)}\n\`\`\``;
+    } else {
+      message = `ℹ️ Ukendt hændelse:\n\`\`\`json
+${JSON.stringify(payload, null, 2)}\n\`\`\``;
     }
   } catch (err) {
     console.error("💥 Fejl ved behandling af payload:", err);
     message = `❗️ Fejl ved behandling af payload:\n\`\`\`${err.message}\`\`\``;
   }
 
-  // Send til Google Chat
   try {
     await sendToChat(message);
     return { statusCode: 200, body: "Besked sendt til Google Chat" };
@@ -66,7 +60,6 @@ exports.handler = async (event) => {
   }
 };
 
-// Hjælpefunktion til at sende til Google Chat med timeout
 async function sendToChat(text) {
   const controller = new AbortController();
   const timeout = setTimeout(() => controller.abort(), 5000);
