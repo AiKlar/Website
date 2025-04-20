@@ -1,1 +1,5 @@
+# SPA fallback
 /* /index.html 200
+
+# Redirect to success page after form submission
+/form-success  /form-success.html  200

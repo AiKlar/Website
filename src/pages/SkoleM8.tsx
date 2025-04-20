@@ -1,8 +1,10 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import SkoleM8Header from "@/components/SkoleM8Header";
 import ContactSection from "@/components/ContactSection";
 
 const SkoleM8 = () => {
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
   useEffect(() => {
     // Scroll to top when component mounts
     window.scrollTo(0, 0);
@@ -26,12 +28,44 @@ const SkoleM8 = () => {
       observer.observe(el);
     });
 
+    // Handle form submission via AJAX
+    const contactForm = document.querySelector('form[name="contact"]');
+    if (contactForm) {
+      contactForm.addEventListener("submit", handleSubmit);
+    }
+
     return () => {
       document.querySelectorAll('.fadeInElement').forEach(el => {
         observer.unobserve(el);
       });
+      
+      // Cleanup event listener
+      if (contactForm) {
+        contactForm.removeEventListener("submit", handleSubmit);
+      }
     };
   }, []);
+
+  const handleSubmit = (event: Event) => {
+    event.preventDefault();
+
+    const form = event.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams(formData).toString()
+    })
+      .then(() => {
+        setFormSubmitted(true);
+        form.reset();
+      })
+      .catch(error => {
+        console.error("Form submission error:", error);
+        alert("Der opstod en fejl ved indsendelse af formularen. Prøv venligst igen.");
+      });
+  };
 
   return (
     <div className="min-h-screen bg-aiklar-light">
@@ -240,38 +274,50 @@ const SkoleM8 = () => {
               </div>
               
               <div className="md:w-1/2">
-                <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" className="bg-white p-6 rounded-lg shadow-md">
-                  <input type="hidden" name="form-name" value="contact" />
-                  
-                  {/* Anti-bot felt, skjules med CSS */}
-                  <p hidden>
-                    <label>Don't fill this out: <input name="bot-field" /></label>
-                  </p>
+                {formSubmitted ? (
+                  <div className="bg-white p-6 rounded-lg shadow-md">
+                    <div className="text-center mb-6">
+                      <svg className="w-16 h-16 text-green-500 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <h3 className="text-xl font-bold mt-4">Tak for din henvendelse!</h3>
+                      <p className="text-gray-600 mt-2">Vi har modtaget din besked og vender tilbage hurtigst muligt.</p>
+                    </div>
+                  </div>
+                ) : (
+                  <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" className="bg-white p-6 rounded-lg shadow-md">
+                    <input type="hidden" name="form-name" value="contact" />
+                    
+                    {/* Anti-bot felt, skjules med CSS */}
+                    <p hidden>
+                      <label>Don't fill this out: <input name="bot-field" /></label>
+                    </p>
 
-                  <div className="mb-4">
-                    <label className="block mb-2 font-medium">Navn:<br />
-                      <input type="text" name="name" required className="w-full p-2 mt-1 border border-gray-300 rounded-md" />
-                    </label>
-                  </div>
-                  
-                  <div className="mb-4">
-                    <label className="block mb-2 font-medium">Email:<br />
-                      <input type="email" name="email" required className="w-full p-2 mt-1 border border-gray-300 rounded-md" />
-                    </label>
-                  </div>
-                  
-                  <div className="mb-6">
-                    <label className="block mb-2 font-medium">Besked:<br />
-                      <textarea name="message" required className="w-full p-2 mt-1 border border-gray-300 rounded-md h-32" />
-                    </label>
-                  </div>
-                  
-                  <div>
-                    <button type="submit" className="w-full bg-aiklar-blue hover:bg-aiklar-blue-dark text-white font-medium py-2 px-4 rounded-md transition-colors">
-                      Send
-                    </button>
-                  </div>
-                </form>
+                    <div className="mb-4">
+                      <label className="block mb-2 font-medium">Navn:<br />
+                        <input type="text" name="name" required className="w-full p-2 mt-1 border border-gray-300 rounded-md" />
+                      </label>
+                    </div>
+                    
+                    <div className="mb-4">
+                      <label className="block mb-2 font-medium">Email:<br />
+                        <input type="email" name="email" required className="w-full p-2 mt-1 border border-gray-300 rounded-md" />
+                      </label>
+                    </div>
+                    
+                    <div className="mb-6">
+                      <label className="block mb-2 font-medium">Besked:<br />
+                        <textarea name="message" required className="w-full p-2 mt-1 border border-gray-300 rounded-md h-32" />
+                      </label>
+                    </div>
+                    
+                    <div>
+                      <button type="submit" className="w-full bg-aiklar-blue hover:bg-aiklar-blue-dark text-white font-medium py-2 px-4 rounded-md transition-colors">
+                        Send
+                      </button>
+                    </div>
+                  </form>
+                )}
               </div>
             </div>
           </div>

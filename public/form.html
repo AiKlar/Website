@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkoleM8 Kontaktformular</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+</head>
+<body class="bg-gray-100 min-h-screen">
+  <div class="container mx-auto px-4 py-8">
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+      <input type="hidden" name="form-name" value="contact" />
+      
+      <!-- Anti-bot field, hidden with CSS -->
+      <p hidden>
+        <label>Don't fill this out: <input name="bot-field" /></label>
+      </p>
+      
+      <h2 class="text-2xl font-bold mb-6 text-center">Kontakt SkoleM8</h2>
+
+      <div class="mb-4">
+        <label class="block mb-2 font-medium">Navn:<br />
+          <input type="text" name="name" required class="w-full p-2 mt-1 border border-gray-300 rounded-md" />
+        </label>
+      </div>
+      
+      <div class="mb-4">
+        <label class="block mb-2 font-medium">Email:<br />
+          <input type="email" name="email" required class="w-full p-2 mt-1 border border-gray-300 rounded-md" />
+        </label>
+      </div>
+      
+      <div class="mb-6">
+        <label class="block mb-2 font-medium">Besked:<br />
+          <textarea name="message" required class="w-full p-2 mt-1 border border-gray-300 rounded-md h-32"></textarea>
+        </label>
+      </div>
+      
+      <div>
+        <button type="submit" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-md transition-colors">
+          Send
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    const handleSubmit = event => {
+      event.preventDefault();
+
+      const myForm = event.target;
+      const formData = new FormData(myForm);
+
+      fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: new URLSearchParams(formData).toString()
+      })
+        .then(() => {
+          window.location.href = "/form-success.html";
+        })
+        .catch(error => {
+          alert("Der opstod en fejl ved indsendelse af formularen. Prøv venligst igen.");
+          console.error("Form submission error:", error);
+        });
+    };
+
+    document.querySelector("form").addEventListener("submit", handleSubmit);
+  </script>
+</body>
+</html>
