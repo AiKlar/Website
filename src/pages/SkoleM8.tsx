@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import SkoleM8Header from "@/components/SkoleM8Header";
+import ContactSection from "@/components/ContactSection";
 
 const SkoleM8 = () => {
   useEffect(() => {
@@ -97,7 +98,7 @@ const SkoleM8 = () => {
                 <p className="text-center font-medium mb-4">SkoleM8 er i øjeblikket under udvikling</p>
                 <p className="text-center">
                   Vi søger skoler, der vil være med til at udvikle SkoleM8 sammen med os. 
-                  <a href="/?section=kontakt" className="text-aiklar-blue hover:underline ml-1">
+                  <a href="#kontakt-skolem8" className="text-aiklar-blue hover:underline ml-1">
                     Kontakt os for at høre mere.
                   </a>
                 </p>
@@ -197,15 +198,97 @@ const SkoleM8 = () => {
                 SkoleM8 er udviklet med sikkerhed og gennemsigtighed som fundament. Alle svar og beslutninger logges automatisk, så de kan dokumenteres ved behov. Brugerne har mulighed for med ét klik at rapportere uhensigtsmæssige svar, og vi følger naturligvis op. Vi er åbne om, hvordan SkoleM8 fungerer – fra de AI-modeller vi benytter, til hvordan data behandles og opbevares. Platformen er hostet i EU og overholder både GDPR og de kommende krav i EU's AI-forordning. For at gøre det nemt at forstå teknikken bag, leverer vi en overskuelig grafik, som viser systemets opbygning og flow. SkoleM8 er kort sagt en sikker løsning – bygget til skoler, i tæt samarbejde med skoler.
               </p>
               
-              <div className="my-10 flex justify-center">
-                <a href="/" className="text-aiklar-blue hover:text-aiklar-blue-dark font-medium flex items-center">
-                  ← Tilbage til forsiden
-                </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Kontaktformular sektion */}
+        <section id="kontakt-skolem8" className="py-12 bg-aiklar-blue/5">
+          <div className="container mx-auto px-6">
+            <h2 className="text-3xl font-bold text-center mb-8">Kontakt os om SkoleM8</h2>
+            
+            <div className="max-w-5xl mx-auto flex flex-col md:flex-row gap-8">
+              <div className="md:w-1/2">
+                <div className="bg-white p-6 rounded-lg shadow-md h-full">
+                  <h3 className="text-xl font-semibold mb-4">Interesseret i at vide mere?</h3>
+                  <p className="mb-4">
+                    Er du interesseret i at høre mere om, hvordan SkoleM8 kan understøtte jeres skole? 
+                    Eller vil du gerne have adgang til en demo for at se, hvordan løsningen fungerer i praksis?
+                  </p>
+                  <p className="mb-4">
+                    Udfyld formularen til højre, så kontakter vi dig for at fortælle mere om mulighederne.
+                  </p>
+                  <p className="mb-4">
+                    Vi søger skoler, der vil være med til at udvikle og teste SkoleM8, så kontakt os også gerne, 
+                    hvis I kunne være interesserede i et pilotprojekt.
+                  </p>
+                  <div className="mt-6 pt-6 border-t border-gray-200">
+                    <div className="flex items-center mb-3">
+                      <svg className="w-5 h-5 text-aiklar-blue mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+                      </svg>
+                      <span>info@aiklar.dk</span>
+                    </div>
+                    <div className="flex items-center">
+                      <svg className="w-5 h-5 text-aiklar-blue mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path>
+                      </svg>
+                      <span>20 20 59 58</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="md:w-1/2">
+                <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" className="bg-white p-6 rounded-lg shadow-md">
+                  <input type="hidden" name="form-name" value="contact" />
+                  
+                  {/* Anti-bot felt, skjules med CSS */}
+                  <p hidden>
+                    <label>Don't fill this out: <input name="bot-field" /></label>
+                  </p>
+
+                  <div className="mb-4">
+                    <label className="block mb-2 font-medium">Navn:<br />
+                      <input type="text" name="name" required className="w-full p-2 mt-1 border border-gray-300 rounded-md" />
+                    </label>
+                  </div>
+                  
+                  <div className="mb-4">
+                    <label className="block mb-2 font-medium">Email:<br />
+                      <input type="email" name="email" required className="w-full p-2 mt-1 border border-gray-300 rounded-md" />
+                    </label>
+                  </div>
+                  
+                  <div className="mb-6">
+                    <label className="block mb-2 font-medium">Besked:<br />
+                      <textarea name="message" required className="w-full p-2 mt-1 border border-gray-300 rounded-md h-32" />
+                    </label>
+                  </div>
+                  
+                  <div>
+                    <button type="submit" className="w-full bg-aiklar-blue hover:bg-aiklar-blue-dark text-white font-medium py-2 px-4 rounded-md transition-colors">
+                      Send
+                    </button>
+                  </div>
+                </form>
               </div>
             </div>
           </div>
         </section>
+
+        {/* Tilbage til forsiden link */}
+        <section className="py-6 bg-white">
+          <div className="container mx-auto px-6">
+            <div className="flex justify-center">
+              <a href="/" className="text-aiklar-blue hover:text-aiklar-blue-dark font-medium flex items-center">
+                ← Tilbage til forsiden
+              </a>
+            </div>
+          </div>
+        </section>
       </main>
+      <ContactSection />
     </div>
   );
 };
