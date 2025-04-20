@@ -1,4 +1,4 @@
-const fetch = require("node-fetch");
+// Ingen ekstern fetch-pakke - brug Netlify/Node 18 global fetch og AbortController
 
 // Webhook-URL gemt som miljøvariabel i Netlify
 const CHAT_WEBHOOK_URL = process.env.GOOGLE_CHAT_WEBHOOK_URL;
@@ -19,8 +19,9 @@ exports.handler = async (event) => {
     console.log("🔍 Parsed body:", JSON.stringify(body, null, 2));
   } catch (err) {
     console.error("💥 Kunne ikke parse body som JSON:", err);
-    // Forsøg at notificere om parse-fejl
-    try { await sendToChat(`❗️ Fejl ved parsing af body:\n\`\`\`${err.message}\`\`\`\nOriginal payload:\n\`\`\`${event.body}\`\`\``); } catch {}
+    try {
+      await sendToChat(`❗️ Fejl ved parsing af body:\n\`\`\`${err.message}\`\`\`\nOriginal payload:\n\`\`\`${event.body}\`\`\``);
+    } catch {}
     return { statusCode: 400, body: `Invalid JSON: ${err.message}` };
   }
 
@@ -30,7 +31,6 @@ exports.handler = async (event) => {
   try {
     // --- Formular‑indsendelse ---
     if (payload.data) {
-      // Dynamisk alle felter
       const lines = Object.entries(payload.data)
         .map(([key, val]) => `- *${key}:* ${val}`)
         .join("\n");
@@ -49,9 +49,7 @@ exports.handler = async (event) => {
     }
     // --- Fallback: dump payload ---
     else {
-      message = `ℹ️ Ukendt hændelse:\n\`\`\`json
-${JSON.stringify(payload, null, 2)}
-\`\`\``;
+      message = `ℹ️ Ukendt hændelse:\n\`\`\`json\n${JSON.stringify(payload, null, 2)}\n\`\`\``;
     }
   } catch (err) {
     console.error("💥 Fejl ved behandling af payload:", err);
