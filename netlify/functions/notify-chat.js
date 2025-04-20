@@ -1,5 +1,4 @@
-// Brug Node.js global fetch/AbortController (Node 18+)
-
+// Node.js 18+: brug global fetch & AbortController
 const CHAT_WEBHOOK_URL = process.env.GOOGLE_CHAT_WEBHOOK_URL;
 
 exports.handler = async function(event) {
@@ -10,53 +9,53 @@ exports.handler = async function(event) {
 
   console.log("🔍 Incoming raw event:", JSON.stringify(event, null, 2));
 
-  // Parse body
+  // Parse JSON-body
   let body;
   try {
     if (!event.body) throw new Error("Manglende request body");
-    body = typeof event.body === "string" ? JSON.parse(event.body) : event.body;
+    body = typeof event.body === 'string' ? JSON.parse(event.body) : event.body;
     console.log("🔍 Parsed body:", JSON.stringify(body, null, 2));
   } catch (err) {
-    console.error("💥 Kunne ikke parse body som JSON:", err);
-    try { await sendToChat(`❗️ Fejl ved parsing af body:\n\`\`\`${err.message}\`\`\`\nOriginal payload:\n\`\`\`${event.body}\`\`\``); } catch {}
+    console.error("💥 Kunne ikke parse body:", err);
+    try { await sendToChat(`❗️ Fejl ved JSON-parse:\n\`\`\`${err.message}\`\`\``); } catch {}
     return { statusCode: 400, body: `Invalid JSON: ${err.message}` };
   }
 
-  // Netlify event header
-  const netlifyEvent = event.headers['x-netlify-event'] || event.headers['X-Netlify-Event'] || '';
+  // Netlify-event header
+  const netlifyEvent = (event.headers['x-netlify-event'] || '').toLowerCase();
 
-  // Bestem payload-container: body.payload for deploy, body for form
-  const payload = body.payload || (netlifyEvent === 'submission_created' ? body : {});
+  // Payload: hvis body.payload findes, ellers hele body
+  const payload = body.payload || body;
   let message = "🤖 Ukendt besked fra webhook.";
 
   try {
-    // Formular-indsendelse (Netlify form submission)
-    if (payload.data && (netlifyEvent === 'submission_created' || payload.form_name || payload.form_id)) {
+    // Form submission
+    if (netlifyEvent === 'submission_created' || payload.data) {
       const formName = payload.form_name || payload.form_id || 'ukendt';
-      const lines = Object.entries(payload.data)
-        .map(([key, val]) => `- *${key}:* ${val}`)
+      const lines = Object.entries(payload.data || {})
+        .map(([k, v]) => `- *${k}:* ${v}`)
         .join("\n");
       message = `📬 **Ny formular‑indsendelse (${formName})**\n\n${lines}`;
     }
-    // Deploy-hændelse (Netlify deploy hook)
+    // Deploy event
     else if (payload.state) {
       const { state, branch, commit_ref, deploy_url, error_message } = payload;
-      if (state === "ready") {
+      if (state === 'ready') {
         message = `✅ **Deploy fuldført** på *${branch}*\n🔗 ${deploy_url}\n🔀 Commit: ${commit_ref}`;
-      } else if (state === "error") {
-        message = `❌ **Deploy fejlede** på *${branch}*\n🔀 Commit: ${commit_ref}\n💥 Fejl: ${error_message || "Ukendt fejl"}`;
+      } else if (state === 'error') {
+        message = `❌ **Deploy fejlede** på *${branch}*\n🔀 Commit: ${commit_ref}\n💥 Fejl: ${error_message || 'Ukendt fejl'}`;
       } else {
-        message = `ℹ️ **Deploy‑status:** ${state} på *${branch}*`;
+        message = `ℹ️ **Deploy-status:** ${state} på *${branch}*`;
       }
     }
-    // Fallback
+    // Fallback: dump payload
     else {
       message = `ℹ️ Ukendt hændelse:\n\`\`\`json
 ${JSON.stringify(payload, null, 2)}\n\`\`\``;
     }
   } catch (err) {
     console.error("💥 Fejl ved behandling af payload:", err);
-    message = `❗️ Fejl ved behandling af payload:\n\`\`\`${err.message}\`\`\``;
+    message = `❗️ Fejl ved behandling af payload: ${err.message}`;
   }
 
   // Send til Google Chat
@@ -64,8 +63,8 @@ ${JSON.stringify(payload, null, 2)}\n\`\`\``;
     await sendToChat(message);
     return { statusCode: 200, body: "Besked sendt til Google Chat" };
   } catch (err) {
-    console.error("🚨 Fejl ved sending til Google Chat:", err);
-    return { statusCode: 500, body: `Fejl ved Google Chat-webhook: ${err.message}` };
+    console.error("🚨 Fejl ved sendToChat:", err);
+    return { statusCode: 500, body: `Fejl: ${err.message}` };
   }
 };
 
@@ -74,8 +73,8 @@ async function sendToChat(text) {
   const timeout = setTimeout(() => controller.abort(), 5000);
   try {
     const res = await fetch(CHAT_WEBHOOK_URL, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ text }),
       signal: controller.signal,
     });
