@@ -35,9 +35,18 @@ const ProductSection = () => {
   return (
     <section id="skolem8" ref={sectionRef} className="py-24 px-6 bg-white">
       <div className="container mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 section-heading">
-          SkoleM8
-        </h2>
+        <div className="text-center mb-16">
+          <div className="flex items-center justify-center gap-3">
+            <img 
+              src="/skolem8_logo.png" 
+              alt="SkoleM8 Logo" 
+              className="w-16 h-16 object-contain"
+            />
+            <h2 className="text-3xl md:text-4xl font-bold section-heading">
+              SkoleM8
+            </h2>
+          </div>
+        </div>
         
         <div className="flex flex-col md:flex-row max-w-6xl mx-auto items-start gap-8 mt-4">
           <div className="flex justify-center fadeInElement w-full md:w-1/2">

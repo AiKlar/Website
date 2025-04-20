@@ -83,7 +83,17 @@ const SkoleM8 = () => {
           <div className="max-w-5xl mx-auto">
             <div className="flex flex-col md:flex-row items-center gap-8">
               <div className="md:w-1/2">
-                <h1 className="text-4xl md:text-5xl font-bold text-white mb-6">SkoleM8</h1>
+                <div className="flex items-center gap-4 mb-2">
+                  <img 
+                    src="/skolem8_logo.png" 
+                    alt="SkoleM8 Logo" 
+                    className="w-16 h-16 object-contain"
+                  />
+                  <h1 className="text-4xl md:text-5xl font-bold text-white">SkoleM8</h1>
+                </div>
+                <p className="text-base md:text-lg text-white/70 italic ml-20 -mt-1 mb-4">
+                  [ˈskoːləˌmeɪt]
+                </p>
                 <p className="text-xl md:text-2xl text-white/80">
                   Den digitale assistent der taler skolens sprog og understøtter elever, lærere og ledelse.
                 </p>
