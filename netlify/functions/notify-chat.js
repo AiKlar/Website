@@ -1,67 +1,89 @@
 const fetch = require("node-fetch");
 
+// Webhook-URL gemt som miljøvariabel i Netlify
+const CHAT_WEBHOOK_URL = process.env.GOOGLE_CHAT_WEBHOOK_URL;
+
 exports.handler = async (event) => {
+  // Tjek at webhook-URL er sat
+  if (!CHAT_WEBHOOK_URL) {
+    console.error("🚨 Mangler miljøvariablen GOOGLE_CHAT_WEBHOOK_URL");
+    return { statusCode: 500, body: "Server konfigurationsfejl" };
+  }
+
+  console.log("🔍 Incoming raw event:", JSON.stringify(event, null, 2));
+
+  let body;
   try {
-    const body = JSON.parse(event.body);
-    console.log("🔍 Received body:", JSON.stringify(body, null, 2));
-
-    let message = "🤖 Ukendt besked fra webhook.";
-    const payload = body.payload;
-
-    // 📬 Case: Kontaktformular
-    if (payload && payload.form_name === "contact" && payload.data) {
-      const { name, email, message: userMessage } = payload.data;
-
-      if (!name || !email || !userMessage) {
-        console.warn("⚠️ Manglende formularfelter");
-        return {
-          statusCode: 400,
-          body: "Formularfelter mangler",
-        };
-      }
-
-      message = `📬 **Ny besked fra kontaktformularen**\n\n👤 *Navn:* ${name}\n✉️ *Email:* ${email}\n📝 *Besked:* ${userMessage}`;
-    }
-
-    // 🚀 Case: Deploy notification
-    else if (payload && payload.deploy) {
-      const { state, branch, commit_ref, deploy_url, error_message } = payload.deploy;
-
-      if (state === "ready") {
-        message = `✅ **Deploy fullført** på *${branch}*\n🔗 ${deploy_url}\n🔀 Commit: ${commit_ref}`;
-      } else if (state === "error") {
-        message = `❌ **Deploy FEJLEDE** på *${branch}*\n🔀 Commit: ${commit_ref}\n💥 Fejl: ${error_message || "Ukendt fejl"}`;
-      } else {
-        message = `ℹ️ **Deploy-status:** ${state} på *${branch}*`;
-      }
-    }
-
-    // 📤 Send besked til Google Chat
-    const chatRes = await fetch("https://chat.googleapis.com/v1/spaces/AAQAjulFuQs/messages?key=AIzaSyDdI0hCZtE6vySjMm-WEfRq3CPzqKqqsHI&token=j8QzeBMgwf7zJqPQ6MluEsjtr3taF38Yc8iTpudRtNM", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text: message }),
-    });
-
-    if (!chatRes.ok) {
-      const errText = await chatRes.text();
-      console.error("🚨 Fejl ved Google Chat-webhook:", errText);
-      return {
-        statusCode: 500,
-        body: `Fejl ved Google Chat-webhook: ${errText}`,
-      };
-    }
-
-    return {
-      statusCode: 200,
-      body: "Besked sendt til Google Chat",
-    };
-
+    if (!event.body) throw new Error("Manglende request body");
+    body = typeof event.body === "string" ? JSON.parse(event.body) : event.body;
+    console.log("🔍 Parsed body:", JSON.stringify(body, null, 2));
   } catch (err) {
-    console.error("💥 Fejl i webhook-funktionen:", err);
-    return {
-      statusCode: 500,
-      body: `Intern fejl: ${err.message}`,
-    };
+    console.error("💥 Kunne ikke parse body som JSON:", err);
+    // Forsøg at notificere om parse-fejl
+    try { await sendToChat(`❗️ Fejl ved parsing af body:\n\`\`\`${err.message}\`\`\`\nOriginal payload:\n\`\`\`${event.body}\`\`\``); } catch {}
+    return { statusCode: 400, body: `Invalid JSON: ${err.message}` };
+  }
+
+  const payload = body.payload || {};
+  let message = "🤖 Ukendt besked fra webhook.";
+
+  try {
+    // --- Formular‑indsendelse ---
+    if (payload.data) {
+      // Dynamisk alle felter
+      const lines = Object.entries(payload.data)
+        .map(([key, val]) => `- *${key}:* ${val}`)
+        .join("\n");
+      message = `📬 **Ny formular‑indsendelse (${payload.form_name || payload.form_id || 'ukendt'})**\n\n${lines}`;
+    }
+    // --- Deploy‑hændelse ---
+    else if (payload.state) {
+      const { state, branch, commit_ref, deploy_url, error_message } = payload;
+      if (state === "ready") {
+        message = `✅ **Deploy fuldført** på *${branch}*\n🔗 ${deploy_url}\n🔀 Commit: ${commit_ref}`;
+      } else if (state === "error") {
+        message = `❌ **Deploy fejlede** på *${branch}*\n🔀 Commit: ${commit_ref}\n💥 Fejl: ${error_message || "Ukendt fejl"}`;
+      } else {
+        message = `ℹ️ **Deploy‑status:** ${state} på *${branch}*`;
+      }
+    }
+    // --- Fallback: dump payload ---
+    else {
+      message = `ℹ️ Ukendt hændelse:\n\`\`\`json
+${JSON.stringify(payload, null, 2)}
+\`\`\``;
+    }
+  } catch (err) {
+    console.error("💥 Fejl ved behandling af payload:", err);
+    message = `❗️ Fejl ved behandling af payload:\n\`\`\`${err.message}\`\`\``;
+  }
+
+  // Send til Google Chat
+  try {
+    await sendToChat(message);
+    return { statusCode: 200, body: "Besked sendt til Google Chat" };
+  } catch (err) {
+    console.error("🚨 Fejl ved sending til Google Chat:", err);
+    return { statusCode: 500, body: `Fejl ved Google Chat-webhook: ${err.message}` };
   }
 };
+
+// Hjælpefunktion til at sende til Google Chat med timeout
+async function sendToChat(text) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 5000);
+  try {
+    const res = await fetch(CHAT_WEBHOOK_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text }),
+      signal: controller.signal,
+    });
+    if (!res.ok) {
+      const errText = await res.text();
+      throw new Error(errText || `HTTP ${res.status}`);
+    }
+  } finally {
+    clearTimeout(timeout);
+  }
+}
