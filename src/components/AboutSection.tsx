@@ -42,7 +42,7 @@ const AboutSection = () => {
               AiKlar er et dansk AI-firma med rødder i uddannelsessektoren og et klart mål: at bringe kunstig intelligens i øjenhøjde med mennesker. Vi udvikler løsninger, der er til at forstå, til at stole på – og til at bruge i praksis.
               </p>
               <p className="text-lg text-aiklar-dark/80 leading-relaxed">
-              Vi er et lille, dedikeret team med stærke kompetencer inden for maskinlæring, softwareudvikling og pædagogik. Vores arbejde bygger på troen på, at AI skal understøtte – ikke overtage – menneskelige beslutninger og relationer. Med SkoleM8, onlinekurser og målrettet rådgivning hjælper vi skoler med at navigere sikkert og meningsfuldt i en teknologisk virkelighed i hastig udvikling.
+              Vi er et lille, dedikeret team med stærke kompetencer inden for maskinlæring, softwareudvikling og pædagogik. Vores arbejde bygger på troen på, at AI skal understøtte og højne – ikke overtage – menneskelige beslutninger og relationer. Med SkoleMate, onlinekurser og målrettet rådgivning hjælper vi skoler med at navigere sikkert og meningsfuldt i en teknologisk virkelighed i hastig udvikling.
               </p>
             </div>
             

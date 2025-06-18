@@ -24,7 +24,7 @@ const Header = () => {
     };
   }, [scrolled]);
 
-  const navItems = ['Om os', 'Det vi gør', 'SkoleM8', 'Kontakt'];
+  const navItems = ['Om os', 'Det vi gør', 'SkoleMate', 'Kontakt'];
 
   const NavLinks = ({ className = "", onClick = () => {} }) => (
     <ul className={`space-y-4 md:space-y-0 md:flex md:space-x-8 ${className}`}>

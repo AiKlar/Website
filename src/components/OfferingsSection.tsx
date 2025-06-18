@@ -108,7 +108,7 @@ const OfferingsSection = () => {
             title="AI Løsninger" 
             description="Vi udvikler skræddersyede AI-løsninger til Efterskoler, Frie Fagskoler og Specialskoler – løsninger, der gør en konkret forskel i den daglige skolegang for lærere, elever og ledelse."
             bulletPoints={[
-              "SkoleM8 - Digital kontaktlærer og assistent",
+              "SkoleMate - AI Platform til Fremtidens skole",
               "Værktøjer til effektivisering af administration",
               "Tilpassede løsninger til specifikke behov"
             ]}
