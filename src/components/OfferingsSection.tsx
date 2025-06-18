@@ -106,7 +106,7 @@ const OfferingsSection = () => {
           
           <Offering 
             title="AI Løsninger" 
-            description="Vi udvikler skræddersyede AI-løsninger til Efterskoler, Frie Fagskoler og Specialskoler – løsninger, der gør en konkret forskel i den daglige skolegang for lærere, elever og ledelse."
+            description="Vi udvikler AI-løsninger til Efterskoler, Frie Fagskoler og Specialskoler – løsninger, der gør en konkret forskel i den daglige skolegang for lærere, elever og ledelse."
             bulletPoints={[
               "SkoleMate - AI Platform til Fremtidens skole",
               "Værktøjer til effektivisering af administration",
