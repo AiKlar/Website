@@ -128,7 +128,7 @@ const FoundersSection = () => {
           />
           <Founder 
             name="Jimmi Bram" 
-            description="Jimmi Bram er en erfaren IT-arkitekt og underviser med en baggrund i softwareudvikling, cybersikkerhed og AI. Efter mange år i ledende IT-roller har han valgt at fokusere på at udvikle AI-løsninger til skoler, hvor teknologi understøtter læring uden at fjerne det menneskelige element. "
+            description="Jimmi Bram er en teknologisk drivkraft med dybe rødder i softwareudvikling, cybersikkerhed og AI. Som tidligere CTO i blandt andet Alm. Brand, arkitekt og iværksætter - bringer han mere end 20 års erfaring med at lede udviklingsteams, designe komplekse systemer og omsætte teknologi til reel værdi. Hos AiKlar står han bag de AI-løsninger, der gør skolernes hverdag mere menneskelig, effektiv og fremtidssikret. "
             delay={500}
             imageSrc="/jimmiprofil.jpeg"
             email="jb@aiklar.dk"
