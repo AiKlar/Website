@@ -119,7 +119,7 @@ const FoundersSection = () => {
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           <Founder 
             name="Søren Larsen" 
-            description="Søren har en solid baggrund som underviser på Efterskoler og Frie Fagskoler, hvor han ikke kun har formidlet viden, men også skabt strukturer, der optimerer både undervisning og administration. Han har gang på gang taget rollen som optimeringsekspert og sat retningslinjer, der sikrer en mere effektiv og meningsfuld hverdag for både elever og ansatte."
+            description="Søren har en solid pædagogisk baggrund, suppleret med efteruddannelse og kurser inden for specialpædagogik og udviklingsforstyrrelser, samt mange års erfaring som underviser på efterskoler og frie fagskoler. Han har ikke blot formidlet viden, men også skabt strukturer, der optimerer både undervisning og administration. Med en særlig ekspertise i arbejdet med unge med sociale og kognitive udfordringer bidrager han, med en dyb forståelse for læring, struktur og menneskelig adfærd i udviklingen af Ai-baserede løsninger hos AiKlar."
             delay={200}
             imageSrc="/sorenprofil.jpeg"
             email="sl@aiklar.dk"
