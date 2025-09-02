@@ -37,12 +37,12 @@ const HeroSection = () => {
       <div className="container mx-auto px-6 text-center relative z-10">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-            <span className="block animate-[fadeIn_1s_ease-in-out_forwards,slideUp_1s_ease-out_forwards] opacity-0 translate-y-8">Smartere AI-løsninger</span>
-            <span className="block mt-2 animate-[fadeIn_1s_ease-in-out_0.3s_forwards,slideUp_1s_ease-out_0.3s_forwards,pulse_2s_ease-in-out_1.3s] opacity-0 translate-y-8">AI der enabler mennesker</span>
+            <span className="block animate-[fadeIn_1s_ease-in-out_forwards,slideUp_1s_ease-out_forwards] opacity-0 translate-y-8">AI-løsninger der løfter</span>
+            <span className="block mt-2 text-3xl md:text-4xl lg:text-5xl animate-[fadeIn_1s_ease-in-out_0.3s_forwards,slideUp_1s_ease-out_0.3s_forwards,pulse_2s_ease-in-out_1.3s] opacity-0 translate-y-8">mennesker i arbejde og læring</span>
           </h1>
           
           <p className="text-lg md:text-xl text-white/80 max-w-xl mx-auto mb-8 transition-all duration-1000 ease-out delay-600 translate-y-0 opacity-100" style={{ animationFillMode: 'forwards' }}>
-          Vi er en dansk AI-virksomhed, der underviser og bygger ansvarlige AI-løsninger til organisationer på tværs af sektorer i hele Danmark. Vi leverer til alle, der vil bruge AI til at skabe løsninger, som ikke erstatter, men enabler mennesker.
+          Vores mål er at levere AI, der ikke erstatter mennesker – men giver dem nye muligheder, viden og værktøjer til at lykkes. Altid på Dansk eller EU infrastruktur og teknologi.
           </p>
           
           <a 
