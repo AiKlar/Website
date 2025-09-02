@@ -1,124 +1,172 @@
 import { useEffect, useRef } from 'react';
 
-interface OfferingProps {
-  title: string;
-  description: string;
-  bulletPoints?: string[];
-  delay: number;
-  icon: React.ReactNode;
-}
+type Feature = { label: string; available?: boolean };
+type CategoryColorKey = 'purple' | 'blue' | 'green' | 'orange' | 'red' | 'pink';
+type FeatureCategory = { name: string; features: Feature[]; color: CategoryColorKey };
 
+const CheckIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M5 12L10 17L20 7" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
 
-const Offering = ({ title, description, bulletPoints, delay, icon }: OfferingProps) => {
-  return (
-    <div 
-      className="bg-white rounded-2xl p-8 shadow-lg border border-aiklar-green/10 hover:border-aiklar-green/30 transition-all duration-500 group opacity-0 animate-slide-in flex flex-col h-full"
-      style={{ animationDelay: `${delay}ms`, animationFillMode: 'forwards' }}
+const CrossIcon = () => (
+  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M6 6L18 18M18 6L6 18" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+const FeatureItem = ({ label, available = true, itemBgClass }: Feature & { itemBgClass?: string }) => (
+  <li className={`flex items-start gap-3 py-2 px-3 rounded-md border ${itemBgClass ?? ''}`}>
+    <span
+      className={
+        `mt-1 inline-flex h-5 w-5 items-center justify-center rounded-full ring-1 ring-inset ` +
+        (available
+          ? 'bg-aiklar-green/10 text-aiklar-green ring-aiklar-green/30'
+          : 'bg-red-100 text-red-500 ring-red-200')
+      }
     >
-      <div className="w-16 h-16 bg-aiklar-blue/10 rounded-full flex items-center justify-center mb-6 mx-auto group-hover:bg-aiklar-blue/20 transition-all duration-300">
-        {icon}
-      </div>
-      <h3 className="text-xl font-semibold mb-3 text-center text-aiklar-dark">{title}</h3>
-      
-      <div className="text-aiklar-dark/70 mb-4">{description}</div>
-      
-      {bulletPoints && bulletPoints.length > 0 && (
-        <div className="mt-auto pt-3 border-t border-aiklar-green/10">
-          <ul className="space-y-1 list-disc list-inside text-aiklar-dark/80">
-            {bulletPoints.map((point, index) => (
-              <li key={index} className="text-sm">{point}</li>
-            ))}
-          </ul>
-        </div>
-      )}
-    </div>
-  );
+      {available ? <CheckIcon /> : <CrossIcon />}
+    </span>
+    <span className={available ? 'text-sm text-aiklar-dark/90' : 'text-sm text-aiklar-dark/60 line-through'}>
+      {label}
+    </span>
+  </li>
+);
+
+const categoryStyles: Record<CategoryColorKey, { headerBg: string; itemBg: string }> = {
+  purple: { headerBg: 'bg-purple-500', itemBg: 'bg-purple-50 border-purple-200' },
+  blue: { headerBg: 'bg-blue-500', itemBg: 'bg-blue-50 border-blue-200' },
+  green: { headerBg: 'bg-emerald-500', itemBg: 'bg-emerald-50 border-emerald-200' },
+  orange: { headerBg: 'bg-orange-500', itemBg: 'bg-orange-50 border-orange-200' },
+  red: { headerBg: 'bg-rose-500', itemBg: 'bg-rose-50 border-rose-200' },
+  pink: { headerBg: 'bg-pink-500', itemBg: 'bg-pink-50 border-pink-200' }
 };
+
+const featureCategories: FeatureCategory[] = [
+  {
+    name: 'Sikkerhed',
+    color: 'blue',
+    features: [
+      { label: 'AI til input/output‑validering for sikkerhed', available: true },
+      { label: 'Politik‑styret adgang og logging', available: true },
+      { label: 'Hostet i EU', available: true }
+    ]
+  },
+  {
+    name: 'Arkitektur',
+    color: 'green',
+    features: [
+      { label: 'Konfigurerbar platform', available: true },
+      { label: 'Multi tenant', available: true },
+      { label: 'Dynamisk RAG til kontekstuel information', available: true },
+      { label: 'MCP Server så AI‑agenter kan udføre opgaver', available: true },
+      { label: 'Lokal eller ekstern AI model', available: true }
+    ]
+  },
+  {
+    name: 'UX/UI',
+    color: 'orange',
+    features: [
+      { label: 'Interaktive brugergrænseflader til optimal AI‑interaktion', available: true },
+      { label: 'Konfigurerbare brugergrænseflader', available: true },
+      { label: 'Dynamisk tilpasning efter AI‑respons', available: true }
+    ]
+  },
+  {
+    name: 'Udvikling & Drift',
+    color: 'pink',
+    features: [
+      { label: 'Let og god test og debugging', available: true },
+      { label: 'Udviklet i Danmark', available: true }
+    ]
+  }
+];
 
 const OfferingsSection = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
-  
+
   useEffect(() => {
     const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const elements = entry.target.querySelectorAll('.animate-slide-in');
-            elements.forEach(el => {
-              el.classList.add('visible');
-            });
-          }
-        });
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
       },
       { threshold: 0.1 }
     );
-    
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-    
-    return () => {
-      if (sectionRef.current) {
-        observer.unobserve(sectionRef.current);
-      }
-    };
+
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => sectionRef.current && observer.unobserve(sectionRef.current);
   }, []);
 
   return (
-    <section id="ydelser" ref={sectionRef} className="py-24 px-6 bg-aiklar-light">
-      <div className="container mx-auto">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 section-heading">
-          Det vi gør
+    <section id="platform" ref={sectionRef} className="py-24 px-6 bg-aiklar-light">
+      <div className="container mx-auto max-w-6xl">
+        <h2 className="text-3xl md:text-4xl font-bold text-center mb-6 section-heading">
+          AiKlar Platformen
         </h2>
-        
-        <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-          <Offering 
-            title="Inspiration" 
-            description="Vi introducerer dig til AI's muligheder og udfordringer gennem engagerende foredrag og hands-on workshops." 
-            bulletPoints={[
-              "Foredrag om AI's potentiale i uddannelse",
-              "Praktiske workshops med værktøjer",
-              "Demystificering af AI-teknologier"
-            ]}
-            delay={100} 
-            icon={
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9.663 17H6.75C5.23122 17 4 15.7688 4 14.25V7.75C4 6.23122 5.23122 5 6.75 5H17.25C18.7688 5 20 6.23122 20 7.75V10.5M15.5 14V19M15.5 19L13 16.5M15.5 19L18 16.5M9 9H15M9 13H12" stroke="#4F76F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            }
-          />
-          
-          <Offering 
-            title="Opkvalificering" 
-            description="On- og offline undervisning i AI løsninger og hvordan man bedst bruger dem i undervisningen." 
-            bulletPoints={[
-              "Hands-on workshops til lærere",
-              "Praktiske tilgange til AI i undervisningen",
-              "Etik og sikkerhed i anvendelsen af AI"
-            ]}
-            delay={300} 
-            icon={
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 11V14M12 14V17M12 14H15M12 14H9M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 3.33782 7" stroke="#4F76F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            }
-          />
-          
-          <Offering 
-            title="AI Løsninger" 
-            description="Vi udvikler AI-løsninger til Efterskoler, Frie Fagskoler og Specialskoler – løsninger, der gør en konkret forskel i den daglige skolegang for lærere, elever og ledelse."
-            bulletPoints={[
-              "SkoleMate - AI Platform til Fremtidens skole",
-              "Værktøjer til effektivisering af administration",
-              "Tilpassede løsninger til specifikke behov"
-            ]}
-            delay={500} 
-            icon={
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 12H12.01M8 12H8.01M16 12H16.01M21 12C21 16.4183 16.9706 20 12 20C10.4607 20 9.01172 19.6565 7.74467 19.0511L3 20L4.39499 16.28C3.51156 15.0423 3 13.5743 3 12C3 7.58172 7.02944 4 12 4C16.9706 4 21 7.58172 21 12Z" stroke="#4F76F6" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            }
-          />
+        {/* Callout text (no box) */}
+        <p className="mb-8 text-center text-aiklar-dark/90">
+          <strong>AiKlar Platformen</strong> er for offentlige institutioner og virksomheder, der vil lave deres egen AI‑løsning og har brug for et sikkert og stærkt fundament at bygge på, der samtidig leverer ud-af-æsken funktioner som gør det let og hurtigt at lave AI løsninger med mennesket i føresædet.
+        </p>
+
+        {/* Arkitektur */}
+        <div className="bg-white rounded-2xl p-8 shadow-lg border border-aiklar-green/10">
+          <div className="md:flex md:items-start md:gap-8">
+            <div className="md:w-7/12">
+              <h3 className="text-xl font-semibold text-aiklar-dark mb-4">Arkitektur og anvendelse</h3>
+              <p className="text-aiklar-dark/80 mb-4">
+                Platformen er microservice‑baseret med moderne, interaktive brugergrænseflader og fleksible
+                integrationsmuligheder til både lokale og eksterne AI‑modeller. Den kan tilpasses domænet – fra
+                SkoleMate, der hjælper lærere med at skabe den bedste skole og læring, til offentlige løsninger,
+                der skaber overblik og struktur for bedre borgerservice.
+              </p>
+              <p className="text-aiklar-dark/80 mb-4">
+                Vi prioriterer gennemsigtighed, sikkerhed og styrbarhed: kontekstuel viden via dynamisk RAG,
+                politik‑styret adgang og logging samt værktøjer, der gør udvikling, test og debugging effektiv.
+              </p>
+              <p className="text-aiklar-dark/80">
+                Fokus er konsekvent: at gøre det let at skabe optimal interaktion mellem menneske og maskine – trygt,
+                effektivt og med mennesket i føresædet.
+              </p>
+            </div>
+            <div className="md:w-5/12 mt-6 md:mt-0">
+              <img
+                src="/AiKlarPlatformGrafik.png"
+                alt="Diagram over AiKlar Platform Core, lag og integrationer"
+                className="w-full h-auto rounded-lg border border-aiklar-green/10 shadow mt-4"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+
+        {/* Kategoriserede features i tabel/kolonne layout */}
+        <div className="mt-8">
+          <h3 className="text-lg font-semibold text-aiklar-dark mb-3">Features fordelt på kategorier</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            {featureCategories.map((category) => {
+              const style = categoryStyles[category.color];
+              return (
+                <div key={category.name} className="rounded-2xl overflow-hidden border border-aiklar-green/10 shadow-lg">
+                  <div className={`${style.headerBg} px-4 py-3 text-white font-semibold`}>{category.name}</div>
+                  <div className="p-4 bg-white">
+                    <ul className="space-y-2">
+                      {category.features.map((feature) => (
+                        <FeatureItem
+                          key={feature.label}
+                          label={feature.label}
+                          available={feature.available}
+                          itemBgClass={`${style.itemBg}`}
+                        />
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
       </div>
     </section>

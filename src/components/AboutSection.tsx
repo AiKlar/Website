@@ -39,10 +39,10 @@ const AboutSection = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-6 animate-slide-in">
               <p className="text-lg text-aiklar-dark/80 leading-relaxed">
-              AiKlar er et dansk AI-firma med rødder i uddannelsessektoren og et klart mål: at bringe kunstig intelligens i øjenhøjde med mennesker. Vi udvikler løsninger, der er til at forstå, til at stole på – og til at bruge i praksis.
+              AiKlar er et dansk AI-firma med et klart mål: at bringe kunstig intelligens i øjenhøjde med mennesker. Vi udvikler løsninger, der er til at forstå, til at stole på – og til at bruge i praksis. Vi leverer til alle, der vil bruge AI til at skabe løsninger, som ikke erstatter, men enabler mennesker.
               </p>
               <p className="text-lg text-aiklar-dark/80 leading-relaxed">
-              Vi er et lille, dedikeret team med stærke kompetencer inden for maskinlæring, softwareudvikling og pædagogik. Vores arbejde bygger på troen på, at AI skal understøtte og højne – ikke overtage – menneskelige beslutninger og relationer. Med SkoleMate, onlinekurser og målrettet rådgivning hjælper vi skoler med at navigere sikkert og meningsfuldt i en teknologisk virkelighed i hastig udvikling.
+              Vi er et lille, dedikeret team med stærke kompetencer inden for maskinlæring, softwareudvikling og brugercentreret softwareudvikling. Vores arbejde bygger på troen på, at AI skal understøtte og højne – ikke overtage – menneskelige beslutninger og relationer. Med vores platforme, onlinekurser og målrettet rådgivning hjælper vi organisationer i både privat og offentlig sektor med at navigere sikkert og meningsfuldt i en teknologisk virkelighed i hastig udvikling.
               </p>
             </div>
             
@@ -56,7 +56,7 @@ const AboutSection = () => {
                     </svg>
                   </div>
                   <span className="text-aiklar-dark/80">
-                    <strong className="text-aiklar-dark">AI med mening</strong> - Vores løsninger skaber reel værdi i skolehverdagen – for både lærere, elever og ledere.
+                    <strong className="text-aiklar-dark">AI med mening</strong> - Vores løsninger skaber reel værdi i hverdagen – for teams, medarbejdere og ledere.
                   </span>
                 </li>
                 <li className="flex items-start">
@@ -76,7 +76,7 @@ const AboutSection = () => {
                     </svg>
                   </div>
                   <span className="text-aiklar-dark/80">
-                    <strong className="text-aiklar-dark">Skabt til skoler</strong> - Teknologien er udviklet af folk med rødder i skoleverdenen – den passer til jeres praksis, ikke omvendt.
+                    <strong className="text-aiklar-dark">Skabt til praksis</strong> - Teknologien er udviklet sammen med praktikere på tværs af brancher – den passer til jeres virkelighed, ikke omvendt.
                   </span>
                 </li>
                 <li className="flex items-start">
@@ -86,7 +86,7 @@ const AboutSection = () => {
                     </svg>
                   </div>
                   <span className="text-aiklar-dark/80">
-                    <strong className="text-aiklar-dark">Vi bygger viden</strong> - AiKlar er mere end produkter – vi uddanner, inspirerer og hjælper skoler med at blive klar til fremtiden med AI.
+                    <strong className="text-aiklar-dark">Vi bygger viden</strong> - AiKlar er mere end produkter – vi uddanner, inspirerer og hjælper jer med at blive klar til fremtiden med AI.
                   </span>
                 </li>
               </ul>

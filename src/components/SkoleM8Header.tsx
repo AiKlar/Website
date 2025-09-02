@@ -23,14 +23,14 @@ const SkoleM8Header = () => {
     };
   }, [scrolled]);
 
-  const navItems = ['Om os', 'Det vi gør', 'SkoleM8', 'Kontakt'];
+  const navItems = ['Om os', 'AiKlar Platformen', 'SkoleM8', 'Kontakt'];
 
   const NavLinks = ({ className = "", onClick = () => {} }) => (
     <ul className={`space-y-4 md:space-y-0 md:flex md:space-x-8 ${className}`}>
       {navItems.map((item) => (
         <li key={item}>
           <a 
-            href={`/?section=${item === 'Om os' ? 'about' : item === 'Det vi gør' ? 'ydelser' : item.toLowerCase()}`} 
+            href={`/?section=${item === 'Om os' ? 'about' : item === 'AiKlar Platformen' ? 'platform' : item.toLowerCase()}`} 
             className="text-white/80 hover:text-white transition-colors duration-300 text-sm tracking-wide"
             onClick={onClick}
           >
