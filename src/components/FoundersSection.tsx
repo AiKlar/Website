@@ -113,7 +113,7 @@ const FoundersSection = () => {
     <section id="stiftere" ref={sectionRef} className="py-24 px-6">
       <div className="container mx-auto">
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 section-heading">
-          Stifterne af AiKlar
+          Teamet bag AiKlar
         </h2>
         
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
@@ -121,19 +121,35 @@ const FoundersSection = () => {
             name="Søren Larsen" 
             description="Søren har en solid pædagogisk baggrund, suppleret med efteruddannelse og kurser inden for specialpædagogik og udviklingsforstyrrelser, samt mange års erfaring som underviser på efterskoler og frie fagskoler. Han har ikke blot formidlet viden, men også skabt strukturer, der optimerer både undervisning og administration. Med en særlig ekspertise i arbejdet med unge med sociale og kognitive udfordringer bidrager han, med en dyb forståelse for læring, struktur og menneskelig adfærd i udviklingen af Ai-baserede løsninger hos AiKlar."
             delay={200}
-            imageSrc="/sorenprofil.jpeg"
+            imageSrc="/sorenprofil.png"
             email="sl@aiklar.dk"
-            title="Stifter & CEO"
+            title="Medstifter"
             linkedIn="https://www.linkedin.com/in/søren-larsen-38234b355/"
           />
           <Founder 
             name="Jimmi Bram" 
-            description="Jimmi Bram er en teknologisk drivkraft med dybe rødder i softwareudvikling, cybersikkerhed og AI. Som tidligere CTO i blandt andet Alm. Brand, arkitekt og iværksætter - bringer han mere end 20 års erfaring med at lede udviklingsteams, designe komplekse systemer og omsætte teknologi til reel værdi. Hos AiKlar står han bag de AI-løsninger, der gør skolernes hverdag mere menneskelig, effektiv og fremtidssikret. "
+            description="Jimmi Bram er en teknologisk drivkraft med dybe rødder i softwareudvikling, cybersikkerhed og AI. Som tidligere CTO i blandt andet Alm. Brand, arkitekt og iværksætter - bringer han mere end 20 års erfaring med at lede udviklingsteams, designe komplekse systemer og omsætte teknologi til reel værdi. Samtidig har han erfaring som underviser fra sin tid som faglærer i Cyber Sikkerhed på Vordingborg Fri Fagskole. "
             delay={500}
-            imageSrc="/jimmiprofil.jpeg"
+            imageSrc="/jimmiprofil.png"
             email="jb@aiklar.dk"
-            title="Stifter & CTO"
+            title="Medstifter"
             linkedIn="https://www.linkedin.com/in/jimmibram/"
+          />
+          <Founder
+            name="Jeppe Klausen"
+            description="Medstifter med erfaring inden for iværksætteri og skalering af selskaber. Har gennem årene arbejdet med udvikling, drift og skalering af både tech- og servicevirksomheder. Brænder for at forstå slutbrugeren og skabe stærke kundeoplevelser, hvor teknologi og brugerbehov mødes. Har en særlig interesse i krydsfeltet mellem forretning, brugere og teknologi – og i at omsætte indsigt til konkrete løsninger, der skaber værdi."
+            delay={800}
+            imageSrc="/jeppeprofil.png"
+            title="Medstifter"
+            linkedIn="https://www.linkedin.com/in/jeppeklausen/"
+          />
+          <Founder
+            name="Kim Alster Glimberg"
+            description="Kim Alster Glimberg er teknologisk arkitekt med en sjælden evne til at forene strategi, drift og innovation. Med mere end 15 års erfaring som CTO og Chief Architect i blandt andet Alm. Brand og Nordea har han stået i spidsen for komplekse cloudtransformationer, systemkonsolideringer og udviklingen af skalerbare softwareplatforme. Han drives af en passion for at gøre teknologi enkel, bæredygtig og meningsfuld – og med en iværksætter i maven trives han bedst, når idéer bliver omsat til virkelige løsninger, der gør en forskel."
+            delay={1100}
+            imageSrc="/kimprofil.png"
+            title="Medstifter"
+            linkedIn="https://www.linkedin.com/in/kimalster/"
           />
         </div>
       </div>
