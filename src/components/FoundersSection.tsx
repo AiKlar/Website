@@ -9,9 +9,10 @@ interface FounderProps {
   email?: string;
   title?: string;
   linkedIn?: string;
+  focusAreas?: string;
 }
 
-const Founder = ({ name, description, delay, imageSrc, email, title, linkedIn }: FounderProps) => {
+const Founder = ({ name, description, delay, imageSrc, email, title, linkedIn, focusAreas }: FounderProps) => {
   // Email with bot protection through JavaScript
   const renderEmail = () => {
     if (!email) return null;
@@ -75,6 +76,9 @@ const Founder = ({ name, description, delay, imageSrc, email, title, linkedIn }:
       <div className="mb-3">
         {renderLinkedIn()}
       </div>
+      {focusAreas && (
+        <p className="text-aiklar-dark/60 text-sm mb-3">{focusAreas}</p>
+      )}
       <p className="text-aiklar-dark/70">{description}</p>
     </div>
   );
@@ -125,6 +129,7 @@ const FoundersSection = () => {
             email="sl@aiklar.dk"
             title="Medstifter"
             linkedIn="https://www.linkedin.com/in/søren-larsen-38234b355/"
+            focusAreas="/ Kunder / Skoler / Lærere / Produkt / Strategi"
           />
           <Founder 
             name="Jimmi Bram" 
@@ -134,22 +139,27 @@ const FoundersSection = () => {
             email="jb@aiklar.dk"
             title="Medstifter"
             linkedIn="https://www.linkedin.com/in/jimmibram/"
+            focusAreas="/ AI / Produktudvikling / Strategi / Arkitektur"
           />
           <Founder
             name="Jeppe Klausen"
             description="Medstifter med erfaring inden for iværksætteri og skalering af selskaber. Har gennem årene arbejdet med udvikling, drift og skalering af både tech- og servicevirksomheder. Brænder for at forstå slutbrugeren og skabe stærke kundeoplevelser, hvor teknologi og brugerbehov mødes. Har en særlig interesse i krydsfeltet mellem forretning, brugere og teknologi – og i at omsætte indsigt til konkrete løsninger, der skaber værdi."
             delay={800}
             imageSrc="/jeppeprofil.png"
+            email="jk@aiklar.dk"
             title="Medstifter"
             linkedIn="https://www.linkedin.com/in/jeppeklausen/"
+            focusAreas="/ Strategi / Vækst / Partnerskaber / Funding / Produkt"
           />
           <Founder
             name="Kim Alster Glimberg"
             description="Kim Alster Glimberg er teknologisk arkitekt med en sjælden evne til at forene strategi, drift og innovation. Med mere end 15 års erfaring som CTO og Chief Architect i blandt andet Alm. Brand og Nordea har han stået i spidsen for komplekse cloudtransformationer, systemkonsolideringer og udviklingen af skalerbare softwareplatforme. Han drives af en passion for at gøre teknologi enkel, bæredygtig og meningsfuld – og med en iværksætter i maven trives han bedst, når idéer bliver omsat til virkelige løsninger, der gør en forskel."
             delay={1100}
             imageSrc="/kimprofil.png"
+            email="ka@aiklar.dk"
             title="Medstifter"
             linkedIn="https://www.linkedin.com/in/kimalster/"
+            focusAreas="/ Arkitektur / DevOps / Udvikling / Drift"
           />
         </div>
       </div>
